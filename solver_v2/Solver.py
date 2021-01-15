@@ -1,5 +1,6 @@
 import time
 import os
+import requests
 
 from core.Simulator import Manager, Role, Status
 from core.Utils import Logger, Config, GetBall
@@ -148,7 +149,8 @@ class Solver(object):
         if ans is not None:
             self.log("recommend:", ans)
             if self.recall is not None: self.recall(ans)
-            TTS(ans)
+            #TTS(ans)
+            requests.post('http://127.0.0.1:2019/command', ('/ac ' + str(ans)).encode('utf-8'))
         else:
             print("no recommend")
         return ans
