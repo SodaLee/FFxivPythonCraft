@@ -15,7 +15,7 @@ class Stage1(StageBase):
             self.count += 1
         if status.rounds == 1:
             return _('闲静')
-        if self.count>3 or InnerQuietLv(status) < 2 or status.rounds >= 20 or status.currentCp < 300:
+        if self.count > 4 or InnerQuietLv(status) < 2 or status.rounds >= 25 or status.currentCp < 280:
             return 'terminate'
         if status.ball == BallManager.GreenBall:
             if not status.has_buff(_('掌握')): return _('掌握')

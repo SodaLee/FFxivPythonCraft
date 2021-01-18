@@ -35,7 +35,7 @@ class Stage4(StageBase):
         if prev_skill.name == _('设计变动'):
             self.design_count += 1
         self.solver.cli_logger.hideTag('Math')
-        if self.Prequeue[0] == _('比尔格的祝福') and self.use_change and self.need_changes(status):
+        if self.Prequeue[0] == _('比尔格的祝福') and self.need_changes(status):
             if not status.has_buff(_('阔步')):
                 return _('阔步')
             if not status.has_buff(_('改革')):
@@ -46,11 +46,11 @@ class Stage4(StageBase):
                 return _('阔步')
             if k > 1 and g > 1 and status.currentCp >= 24 + SkillManager.getCp(_('观察'), status):
                 return _('观察')
-            if k > 1 and g == 1 and status.currentCp >= 24 + SkillManager.getCp(_('阔步'), status):
-                return _('阔步')
-            if k == 1 and g > 1 and status.currentCp >= 24 + SkillManager.getCp(_('改革'), status):
+            if k > 1 and g == 1 and status.currentCp >= 24 + SkillManager.getCp(_('改革'), status):
                 return _('改革')
-            if self.design_count < 3:
+            if k == 1 and g > 1 and status.currentCp >= 24 + SkillManager.getCp(_('阔步'), status):
+                return _('阔步')
+            if self.use_change and self.design_count < 3:
                 return _('设计变动')
         if self.Prequeue[0] == _('观察') and status.ball == BallManager.RedBall:
             self.Prequeue.pop(0)
