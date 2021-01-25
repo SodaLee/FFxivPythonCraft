@@ -18,16 +18,16 @@ class _SkillManager(dict):
                     self.list.add(temp.name)
 
     def getCp(self, key, status):
-        return CallOrVar(self[key].cp, status)
+        return CallOrVar(self[key].calc_cp, status)
 
     def getProgress(self, key, status):
-        return CallOrVar(self[key].progress, status)
+        return CallOrVar(self[key].calc_progress, status)
 
     def getQuality(self, key, status):
-        return CallOrVar(self[key].quality, status)
+        return CallOrVar(self[key].calc_quality, status)
 
     def getDurability(self, key, status):
-        return CallOrVar(self[key].durability, status)
+        return CallOrVar(self[key].calc_durability, status)
 
 
 class _BuffManager(dict):
