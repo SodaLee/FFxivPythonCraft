@@ -76,6 +76,9 @@ class Stage3(StageBase):
                     if skills[-1] not in AllowBuffs and tempStats.currentDurability > durReq and (
                             best is None or tempStats.currentQuality > best[0].currentQuality):
                         best = newData
+                        if best[0].currentQuality > 51295:
+                            self.need_refine = False
+                            break
                     queue.append(newData)
         self.solver.cli_logger.showTag("Math")
         return best
@@ -83,7 +86,9 @@ class Stage3(StageBase):
     def is_finished(self, status, prev_skill=None):
         if not bool(self.Prequeue) or (status.ball not in [BallManager.WhiteBall, BallManager.YellowBall, BallManager.DeepBlueBall]):
             start = time.perf_counter()
-            ans = self.try_solve(status, 8)
+            ans = None
+            if self.need_refine:
+                ans = self.try_solve(status, 8)
             if ans:
                 self.Prequeue = ans[1]
                 self.log("new plan in {:.2f}s:{}({})".format(time.perf_counter() - start, self.Prequeue, ans[0].currentQuality))
@@ -95,3 +100,4 @@ class Stage3(StageBase):
 
     def reset(self):
         self.Prequeue.clear()
+        self.need_refine = True
