@@ -1,7 +1,7 @@
 from . import Maths
 from .Utils import CallOrVar
 import math
-
+import copy
 
 class StatusBuff(object):
     def __str__(self):
@@ -16,7 +16,7 @@ class StatusBuff(object):
         self.rounds = rounds
         buff.defaultStatus(self)
     def clone(self):
-        return StatusBuff(self.buff, rounds=self.rounds,data=self.data)
+        return StatusBuff(copy.deepcopy(self.buff), rounds=self.rounds,data=self.data)
 
     def nextRound(self, status):
         temp = self.clone()
@@ -64,10 +64,13 @@ class Status(object):
         return self.currentProgress >= self.target.maxProgress
 
     def clone(self):
+        '''
         return Status(player=self.player, target=self.target, rounds=self.rounds, baseProgress=self.baseProgress,
                       baseQuality=self.baseQuality, currentDurability=self.currentDurability,
                       currentProgress=self.currentProgress, currentQuality=self.currentQuality, currentCp=self.currentCp,
                       buffs={key:buff.clone() for key, buff in self.buffs.items()}, ball=self.ball, data=self.data)
+        '''
+        return copy.deepcopy(self)
 
     def buff_goes_next(self):
         self.buffs = {name: buff.nextRound(self) for name, buff in self.buffs.items()}

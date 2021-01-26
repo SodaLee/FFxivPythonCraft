@@ -43,7 +43,7 @@ def base_quality(control: int, clv: int, rlv: int):
 
 
 def total_push(efficiency, base, ball=1):
-    Logger("efficiency:{}\tbase:{}\tball:{}".format(efficiency, base, ball), tag=tag)
+    Logger("efficiency:{}\tbase:{}\tball:{}".format(efficiency, math.floor(base), ball), tag=tag)
     temp = math.floor(efficiency * math.floor(base * ball))
     Logger("total push:{}".format(temp), tag=tag)
     return temp
