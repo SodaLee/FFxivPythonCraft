@@ -66,7 +66,7 @@ class Stage3(StageBase):
             tempData = queue.pop(0)
             allow = self.allowSkills(tempData[0])
             for skills in allow:
-                tempStats = tempData[0]
+                tempStats = tempData[0].clone()
                 for i, skill in enumerate(skills):
                     tempStats = tempStats.use_skill(SkillManager[skill])
                     if tempStats.ball != BallManager.WhiteBall: tempStats.ball = BallManager.WhiteBall

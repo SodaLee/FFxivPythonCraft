@@ -1,5 +1,6 @@
 from . import Maths
 from .Utils import CallOrVar
+import math
 
 
 class StatusBuff(object):
@@ -46,7 +47,7 @@ class Status(object):
         self.currentProgress = currentProgress
         self.currentQuality = currentQuality
         self.baseProgress = baseProgress if baseProgress is not None else Maths.base_progress(player.craft, player.clv, target.rlv)
-        self.baseQuality = baseQuality if baseQuality is not None else [Maths.base_quality(player.control * (i * 0.2 + 1), player.clv, target.rlv) for
+        self.baseQuality = baseQuality if baseQuality is not None else [Maths.base_quality(math.floor(player.control * (i * 0.2 + 1)), player.clv, target.rlv) for
                                                                         i in range(11)]
         self.currentDurability = currentDurability if currentDurability is not None else target.maxDurability
         self.currentCp = currentCp if currentCp is not None else player.maxCp
